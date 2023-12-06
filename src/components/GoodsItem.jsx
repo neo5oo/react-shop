@@ -1,3 +1,6 @@
+import { ShopContext } from "../context";
+import { useContext } from "react";
+
 function GoodsItem(props) {
   const {
     id,
@@ -5,8 +8,9 @@ function GoodsItem(props) {
     description,
     price,
     full_background,
-    addToBasket = Function.prototype,
   } = props;
+
+  const {addToBasket} = useContext(ShopContext)
 
   return (
     <div className="card">
@@ -18,12 +22,21 @@ function GoodsItem(props) {
         <p>{description}</p>
       </div>
       <div className="card-action">
-        <button className="btn" onClick={() => addToBasket({
-          id,
-          name,
-          price,
-        })}>Купить</button>
-        <span className="right" style={{fontSize: '1.8rem'}}>{price} руб.</span>
+        <button
+          className="btn"
+          onClick={() =>
+            addToBasket({
+              id,
+              name,
+              price,
+            })
+          }
+        >
+          Купить
+        </button>
+        <span className="right" style={{ fontSize: "1.8rem" }}>
+          {price} руб.
+        </span>
       </div>
     </div>
   );
